@@ -18,7 +18,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`chembox` was created by Wilfred Hass. It is licensed under the terms of the MIT license.
+`chembox` was created by Wilfred Hass, Vikram Grewal, Luke Yang, Nate Puangpanbut. It is licensed under the terms of the MIT license.
 
 ## Credits
 
