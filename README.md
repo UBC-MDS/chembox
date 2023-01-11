@@ -40,7 +40,15 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`chembox` was created by Wilfred Hass, Vikram Grewal, Luke Yang, Nate Puangpanbut. It is licensed under the terms of the MIT license.
+`chembox` is licensed under the terms of the MIT license.
+
+## Contributors
+The contributors of this project are
+Wilfred Hass, Vikram Grewal, Luke Yang, and Nate Puangpanbut.
+
+<a href="https://github.com/UBC-MDS/chembox/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=UBC-MDS/chembox&max=1000" />
+</a>
 
 ## Credits
 
