@@ -1,8 +1,12 @@
 # chembox
 
-A package to analyze chemical formulas
+## Introduction
+
+`chembox` is a package for molecular information calculator based on empirical formulas of chemicals in raw text. It is designed to intelligently process text input containing the chemical formula and provide associated information on the inquired molecule. It is able to provide the molar mass, check a formula's validity, and provide a balanced combustion equation if the input is combustible. This tool can be utilized for various educational and research purposes for simple and fast information retrieval.
 
 ## Installation
+
+`chembox` is developed and tested on Python 3.10. You can install it from PyPi via pip:
 
 ```bash
 $ pip install chembox
@@ -10,15 +14,41 @@ $ pip install chembox
 
 ## Usage
 
-- TODO
+The package includes 4 functions for solving chemistry problems:
+
+- `get_elements`a parser that takes a chemical formula in string format and returns a pandas data frame that contains the elements and their respective count. 
+
+- `is_valid`: a checker that returns a boolean indicating whether a given input is chemically reasonable.
+
+- `get_molar_mass`: a method that takes a chemical formula in string format and returns its molar mass in a desired unit (default in `g/mol`).
+
+- `get_combustion_equation`: a method that takes a text chemical formula that only contains carbon (`C`) and hydrogen (`H`) and outputs a balanced equation resulting from combustion.
+
+## Fitting into the Python ecosystem
+
+A similar package [chemsolve](https://github.com/amogh7joshi/chemsolve) is available online that employs a similar string-parsing design and molar mass calculation.
+
+What we do differently:
+
+- We include an extra unit conversion for molar mass for simpler user configuration and enhanced functionality.
+
+- `chemsolve` accepts user-defined reactions. In our package, we include methods for automated combustion equation generation and balancing.
 
 ## Contributing
 
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a [Code of Conduct](https://github.com/UBC-MDS/chembox/blob/main/CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
 ## License
 
-`chembox` was created by Wilfred Hass, Vikram Grewal, Luke Yang, Nate Puangpanbut. It is licensed under the terms of the MIT license.
+`chembox` is licensed under the terms of the MIT license.
+
+## Contributors
+The contributors of this project are
+Wilfred Hass, Vikram Grewal, Luke Yang, and Nate Puangpanbut.
+
+<a href="https://github.com/UBC-MDS/chembox/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=UBC-MDS/chembox&max=1000" />
+</a>
 
 ## Credits
 
