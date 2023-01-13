@@ -1,6 +1,4 @@
-import pandas as pd
-
-def get_elements(molecule: str):
+def get_elements(formula : str):
     """
     Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
     
@@ -24,6 +22,9 @@ def get_elements(molecule: str):
 
     # get_elements function code here
     # ...
+    import pandas as pd
+    
+    
     
     return True
 
