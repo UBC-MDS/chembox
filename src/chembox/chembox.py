@@ -1,6 +1,6 @@
 import pandas as pd
 
-def get_elements(formula):
+def get_elements(formula : str):
     """
     Convert chemistry formular into fundamental chemical elements with its respective counts as a dataframe.
     
@@ -18,9 +18,8 @@ def get_elements(formula):
     --------
     >>> from chembox import get_elements
     >>> get_elements('5(C2H4)')
-    --------------
-    C - H - count
-    2 - 4 - 5
+    |    C    |    H    |    count    |
+    |    2    |    4    |      5      |
     """
 
     # get_elements function code here
