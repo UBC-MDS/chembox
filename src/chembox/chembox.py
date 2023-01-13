@@ -1,5 +1,3 @@
-import pandas as pd
-
 def get_elements(formula : str):
     """
     Convert chemistry formular into fundamental chemical elements with its respective counts as a dataframe.
@@ -24,6 +22,9 @@ def get_elements(formula : str):
 
     # get_elements function code here
     # ...
+    import pandas as pd
+    
+    
     
     return True
 
