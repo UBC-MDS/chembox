@@ -52,6 +52,7 @@ def is_valid(molecule: str) -> bool:
     >>> is_valid('CH3COOH')
     True
     """
+    import pandas as pd
     
     return True
 
@@ -78,6 +79,8 @@ def get_molec_props(molecule: str):
     |    H    |   1.0080    |      120      |8.988e-5 |      +1/-1      |
 
     """
+    import pandas as pd
+    return True
 
 def get_combustion_equation(molecule: str):
     """
@@ -100,4 +103,5 @@ def get_combustion_equation(molecule: str):
     | C5H12 | O2 | CO2 | H2O |
     |   1   |  8 |  5  |  6  | 
     """
+    import pandas as pd
     return True
