@@ -1,8 +1,32 @@
 import pandas as pd
 
-def get_elements():
-    # for Nate
-    return pd.DataFrame()
+def get_elements(formula):
+    """
+    Convert chemistry formular into fundamental chemical elements with its respective counts as a dataframe.
+    
+    Parameters
+    ----------
+    formula : str
+        Chemistry formular.
+    
+    Returns
+    -------
+    dataframe
+        The dataframe of each chemical elements with its molecular weight and count.
+        
+    Examples
+    --------
+    >>> from chembox import get_elements
+    >>> get_elements('5(C2H4)')
+    --------------
+    C - H - count
+    2 - 4 - 5
+    """
+
+    # get_elements function code here
+    # ...
+    
+    return True
 
 def is_valid(formula: str) -> bool: 
     """
