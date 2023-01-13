@@ -7,6 +7,8 @@ helps, and credit will always be given.
 
 ### Report Bugs
 
+Report bugs at https://github.com/UBC-MDS/chembox/issues
+
 If you are reporting a bug, please include:
 
 * Your operating system name and version.
@@ -31,6 +33,8 @@ on the web in blog posts, articles, and such.
 
 ### Submit Feedback
 
+The best way to send feedback is to file an issue at https://github.com/UBC-MDS/chembox/issues
+
 If you are proposing a feature:
 
 * Explain in detail how it would work.
@@ -42,10 +46,17 @@ If you are proposing a feature:
 
 Ready to contribute? Here's how to set up `chembox` for local development.
 
-1. Download a copy of `chembox` locally.
-2. Install `chembox` using `poetry`:
+1. Fork the `chembox` repo on GitHub.
+2. Clone your fork locally:
+
+    ``` console
+    git clone git@github.com:your_name_here/chembox.git
+    ```
+
+3. Install `chembox` using `poetry`:
 
     ```console
+    cd chembox/
     $ poetry install
     ```
 
@@ -57,15 +68,45 @@ Ready to contribute? Here's how to set up `chembox` for local development.
 
 4. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests.
 
+    ```console
+    poetry run pytest
+    ```
+
 5. Commit your changes and open a pull request.
+
+    ```console
+    git add .
+    git commit -m "Your detailed description of your changes."
+    git push origin name-of-your-bugfix-or-feature
+    ```
 
 ## Pull Request Guidelines
 
 Before you submit a pull request, check that it meets these guidelines:
 
 1. The pull request should include additional tests if appropriate.
-2. If the pull request adds functionality, the docs should be updated.
-3. The pull request should work for all currently supported operating systems and versions of Python.
+2. If the pull request adds functionality, the docs should be updated, including adding a description of a new function in the README.md.
+3. The pull request should work for all currently supported operating systems and versions of Python (3.9). Check https://github.com/UBC-MDS/chembox/pulls and make sure that the tests pass for all supported Python versions.
+
+## Tips
+
+ To run a suibset of tests:
+
+ ```console
+py.test tests.test_chembox
+ ```
+
+## Deploying
+
+A reminder for the maintainers on how to deploy:
+
+Ensure the following secrets are recorded on GitHub:
+
+* CODECOV_TOKEN
+* PYPI_USERNAME
+* PYPI_PASSWORD
+
+GitHub Actions should build and deploy to testPyPI when a pull request is merged into master.
 
 ## Code of Conduct
 
