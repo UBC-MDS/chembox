@@ -1,11 +1,11 @@
-def get_elements(formula : str):
+def get_elements(molecule : str):
     """
-    Convert chemistry formular into fundamental chemical elements with its respective counts as a dataframe.
+    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
     
     Parameters
     ----------
-    formula : str
-        Chemistry formular.
+    molecule : str
+        Chemical molecule.
     
     Returns
     -------
@@ -28,22 +28,23 @@ def get_elements(formula : str):
     
     return True
 
-def is_valid(formula: str) -> bool: 
+def is_valid(molecule: str) -> bool: 
     """
-    Check if a given string chemical formula is chemically valid
+    Check if the given string of a chemical molecule is chemically valid
 
     Parameters
     ----------
-    formula : str
-        Input chemical formula
+    molecule : str
+        Input chemical molecule
 
     Returns
     -------
     is_valid : bool
-        True if the chemical formula is valid and false otherwise
+        True if the chemical molecule is valid and false otherwise
 
     Examples
     --------
+    >>> from chembox import is_valid
     >>> is_valid('CH')
     False
     >>> is_valid('CH4')
@@ -51,10 +52,11 @@ def is_valid(formula: str) -> bool:
     >>> is_valid('CH3COOH')
     True
     """
+    import pandas as pd
     
     return True
 
-def get_molec_props(molecule : str):
+def get_molec_props(molecule: str):
     """
     Returns a dataframe with various properties of each element in the molecule
 
@@ -70,13 +72,36 @@ def get_molec_props(molecule : str):
 
     Examples
     --------
+    >>> from chembox import get_molec_props
     >>> get_molec_props('CH')
     | Element | Atomic_Mass | Atomic_Radius | Density | Electron_Config |
     |    C    |   12.011    |      170      | 2.2670  |   +4, +2, -4    |
     |    H    |   1.0080    |      120      |8.988e-5 |      +1/-1      |
 
     """
+    import pandas as pd
+    return True
 
-def get_combustion_equation():
-    # for Wilfred
-    print('Hello world')
+def get_combustion_equation(molecule: str):
+    """
+    Returns a dataframe with a balanced combustion equation for the given molecule.
+    
+    Parameters
+    ----------
+    molecule : str
+        Input chemical molecule as a string ready to be parsed
+
+    Returns
+    -------
+    comb_df : dataframe
+        A dataframe containing the balanced coefficients of the combustion equation relating to the molecule.
+
+    Examples
+    --------
+    >>> from chembox import get_combustion_equation
+    >>> get_combustion_equation('C5H12')
+    | C5H12 | O2 | CO2 | H2O |
+    |   1   |  8 |  5  |  6  | 
+    """
+    import pandas as pd
+    return True
