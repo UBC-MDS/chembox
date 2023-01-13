@@ -1,13 +1,13 @@
 import pandas as pd
 
-def get_elements(formula: str):
+def get_elements(molecule: str):
     """
-    Convert chemistry formular into fundamental chemical elements with its respective counts as a dataframe.
+    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
     
     Parameters
     ----------
-    formula : str
-        Chemistry formular.
+    molecule : str
+        Chemical molecule.
     
     Returns
     -------
@@ -27,22 +27,23 @@ def get_elements(formula: str):
     
     return True
 
-def is_valid(formula: str) -> bool: 
+def is_valid(molecule: str) -> bool: 
     """
-    Check if a given string chemical formula is chemically valid
+    Check if the given string of a chemical molecule is chemically valid
 
     Parameters
     ----------
-    formula : str
-        Input chemical formula
+    molecule : str
+        Input chemical molecule
 
     Returns
     -------
     is_valid : bool
-        True if the chemical formula is valid and false otherwise
+        True if the chemical molecule is valid and false otherwise
 
     Examples
     --------
+    >>> from chembox import is_valid
     >>> is_valid('CH')
     False
     >>> is_valid('CH4')
@@ -69,6 +70,7 @@ def get_molec_props(molecule: str):
 
     Examples
     --------
+    >>> from chembox import get_molec_props
     >>> get_molec_props('CH')
     | Element | Atomic_Mass | Atomic_Radius | Density | Electron_Config |
     |    C    |   12.011    |      170      | 2.2670  |   +4, +2, -4    |
@@ -78,7 +80,7 @@ def get_molec_props(molecule: str):
 
 def get_combustion_equation(molecule: str):
     """
-    Returns a dataframe with a balanced combustion equation
+    Returns a dataframe with a balanced combustion equation for the given molecule.
     
     Parameters
     ----------
