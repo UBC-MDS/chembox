@@ -1,4 +1,4 @@
-def get_elements(formula : str):
+def get_elements(molecule : str):
     """
     Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
     
