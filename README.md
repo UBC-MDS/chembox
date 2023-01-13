@@ -20,7 +20,7 @@ The package includes 4 functions for solving chemistry problems:
 
 - `is_valid`: a checker that returns a boolean indicating whether a given input is chemically reasonable.
 
-- `get_molar_mass`: a method that takes a chemical formula in string format and returns its molar mass in a desired unit (default in `g/mol`).
+- `get_molec_props`: a method that takes a chemical formula in string format and returns a dataframe with various useful properties of each element in the formula.
 
 - `get_combustion_equation`: a method that takes a text chemical formula that only contains carbon (`C`) and hydrogen (`H`) and outputs a balanced equation resulting from combustion.
 
@@ -30,7 +30,7 @@ A similar package [chemsolve](https://github.com/amogh7joshi/chemsolve) is avail
 
 What we do differently:
 
-- We include an extra unit conversion for molar mass for simpler user configuration and enhanced functionality.
+- We include a dataframe of the molecule properties to give the user enhanced functionality and insights.
 
 - `chemsolve` accepts user-defined reactions. In our package, we include methods for automated combustion equation generation and balancing.
 
