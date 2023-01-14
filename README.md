@@ -46,6 +46,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 The contributors of this project are
 Wilfred Hass, Vikram Grewal, Luke Yang, and Nate Puangpanbut.
 
+
 <a href="https://github.com/UBC-MDS/chembox/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=UBC-MDS/chembox&max=1000" />
 </a>
