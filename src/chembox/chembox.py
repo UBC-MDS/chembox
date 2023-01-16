@@ -14,7 +14,7 @@ def get_elements(molecule : str):
         
     Examples
     --------
-    >>> from chembox import get_elements
+    >>> from chembox.chembox import get_elements
     >>> get_elements('5(C2H4)')
     |    C    |    H    |    count    |
     |    2    |    4    |      5      |
@@ -44,7 +44,7 @@ def is_valid(molecule: str) -> bool:
 
     Examples
     --------
-    >>> from chembox import is_valid
+    >>> from chembox.chembox import is_valid
     >>> is_valid('CH')
     False
     >>> is_valid('CH4')
@@ -72,7 +72,7 @@ def get_molec_props(molecule: str):
 
     Examples
     --------
-    >>> from chembox import get_molec_props
+    >>> from chembox.chembox import get_molec_props
     >>> get_molec_props('CH')
     | Element | Atomic_Mass | Atomic_Radius | Density | Electron_Config |
     |    C    |   12.011    |      170      | 2.2670  |   +4, +2, -4    |
@@ -98,10 +98,41 @@ def get_combustion_equation(molecule: str):
 
     Examples
     --------
-    >>> from chembox import get_combustion_equation
+    >>> from chembox.chembox import get_combustion_equation
     >>> get_combustion_equation('C5H12')
     | C5H12 | O2 | CO2 | H2O |
     |   1   |  8 |  5  |  6  | 
     """
     import pandas as pd
-    return True
+
+    if type(molecule) != str:
+        raise TypeError("Molecule must be inserted as a string!")   
+
+    C5H12 = pd.DataFrame({"C": [1], "H": [4], "count": [5]})
+    # mol_df = get_elements(molecule)
+    if not (set(C5H12.columns.tolist()) == set(["C", "H"]) or set(C5H12.columns.tolist()) == set(["C", "H", "count"])):
+        raise KeyError("The molecule needs to have on carbon and hydrogen atoms, please try again")
+
+    if not is_valid(molecule):
+        return "The molecule inserted is not valid, please try again"
+
+    # get atom counts from string parser
+    num_C = C5H12.loc[0, "C"]
+    num_H = C5H12.loc[0, "H"]
+    num_O2 = (num_C * 2 + num_H/2) / 2
+    num_mol = 1
+    count = 1
+    if "count" in C5H12.columns:
+        count = C5H12.loc[0, "count"]
+
+    comb_eq = pd.DataFrame({molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
+
+    # account for fractional oxygen
+    if (num_O2 + num_C + num_H)%1 != 0:
+        comb_eq = comb_eq.mul(2, axis=0)
+
+    # multiplication factor
+    if count > 1:
+        comb_eq = comb_eq.mul(count, axis=0)
+
+    return comb_eq.astype(int)
