@@ -2,7 +2,14 @@ from chembox.chembox import *
 import pandas as pd
 
 def test_get_combustion_equation():
-    """Test combustion equation with possible chemicals."""
+    """ Test function for unit tests of the `get_combustion_equation`
+
+    Raises:
+        KeyError: Check if a molecule has only C and H atoms
+        KeyError: Check if a molecule has only C and H atoms
+        KeyError: Check if a molecule has only C and H atoms
+        TypeError: Check if a molecule has string type
+    """
     C5H12 = "C5H12"
     C6H14 = "C6H14"
     CO2 = "CO2"
