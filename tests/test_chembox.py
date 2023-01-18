@@ -27,4 +27,4 @@ def test_is_valid():
     assert not is_valid('H2(CO3)10')
 
      # Test for invalid chemical (too few sodiums)
-    assert is_valid('NaCO3')
+    assert not is_valid('NaCO3')
