@@ -28,6 +28,67 @@ def get_elements(molecule : str):
     
     return True
 
+
+def get_components(molecule):
+    """
+    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
+    
+    Parameters
+    ----------
+    molecule : str
+        Chemical molecule.
+    
+    Returns
+    -------
+    defaultdict
+        A dictionary that contains the elements as keys and values as counts
+        
+    Examples
+    --------
+    >>> from chembox import get_components
+    >>> get_components('Na2SO4')
+    defaultdict(int, {'Na': 2, 'S': 1, 'O': 4})
+    """
+    from collections import defaultdict
+    import pandas as pd
+    components = defaultdict(int)
+    elements = pd.read_csv('data/elements.csv')
+    # find subcomponents
+    while molecule.find(')') >= 0:
+        end_brac = molecule.find(')')
+        start_brac = end_brac - 1
+        while molecule[start_brac] != '(':
+            start_brac -= 1
+        subcomponent = get_components(molecule[start_brac + 1:end_brac])
+        ind_start = end_brac + 1 
+        ind_end = ind_start + 1
+        while ind_end < len(molecule) and molecule[ind_end].isnumeric():
+            ind_end += 1
+
+        # Get the subscript number
+        num = molecule[ind_start: ind_end]
+        # Update the count of the molecules
+        for comp in subcomponent:
+            subcomponent[comp] = subcomponent[comp] * int(num)
+        # Remove the original string containing ()
+        molecule = molecule.replace(molecule[start_brac:end_brac+1]+num, '')
+        for comp in subcomponent:
+            components[comp] += subcomponent[comp]
+
+    # if there are no more brackets
+    import re
+    # split by capital letters
+    elem_set = re.findall('[A-Z][^A-Z]*', molecule)
+    for elem in elem_set:
+        if re.search(r"\d", elem):
+            components[elem[:re.search(r"\d", elem).start()]] += \
+                int(elem[re.search(r"\d", elem).start():])
+        else:
+            components[elem] += 1
+    
+    return components
+
+
 def is_valid(molecule: str) -> bool: 
     """
     Check if the given string of a chemical molecule is chemically valid
@@ -53,9 +114,57 @@ def is_valid(molecule: str) -> bool:
     False
     """
     import pandas as pd
-    
+    from collections import defaultdict
+    conjugates = pd.read_csv('data/conjugates.csv')
+    elements = pd.read_csv('data/elements.csv')
+    components = defaultdict(int)
+    for conj in conjugates['name']:
+        # if there exists a conjugate abbreviation
+        if molecule.find(conj) >= 0:
+            molecule = molecule.replace(conj, '')
+            components[conj] = 1
+            multiple_loc = molecule.find('()')
 
-    return True
+            # Handle if there are multiple conjugates
+            if multiple_loc >= 0:
+                ind_start = multiple_loc + len('()') 
+                ind_end = ind_start + 1
+                while ind_end < len(molecule) and molecule[ind_end].isnumeric():
+                    ind_end += 1
+
+                # Get the subscript number
+                num = molecule[ind_start: ind_end]
+                # Update the count of the molecules
+                components[conj] = components[conj] * int(num)
+                # Remove the original string containing ()
+                molecule = molecule.replace('()'+num, '')
+    # find if there exist brackets
+
+    other_elem = get_components(molecule)
+    for elem in other_elem:
+        components[elem] += other_elem[elem]
+
+    valance = 0
+
+    for elem in components:
+        if len(conjugates[conjugates['name']==elem]) == 1:
+            valance += int(conjugates[conjugates['name']==elem]['valance']) * \
+                components[elem]
+        elif len(elements[elements['Symbol']==elem]) == 1:
+            info = elements[elements['Symbol']==elem]
+            group = int(info['Group'])
+            period = int(info['Period'])
+
+            if group > 3:
+                elem_val = group - 18
+            else:
+                elem_val = group
+            valance += elem_val * \
+                components[elem]
+        else:
+            raise ValueError('An unknown element '+elem+' entered. Please check your input.')
+    # check if final valance is 0
+    return valance == 0
 
 def get_molec_props(molecule: str):
     """
