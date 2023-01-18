@@ -27,33 +27,25 @@ def test_get_combustion_equation():
     actual = pd.DataFrame(({"C6H14": [2], "O2": [19], "CO2": [12], "H2O": [14]}))
     assert actual == expected, "Balancing fractional oxygen incorrectly!"
 
-    try:
-        expected = get_combustion_equation(CO2)
-    except KeyError:
-        raise KeyError("Molecule needs only carbon and hydrogen atoms")
+    with pytest.raises(KeyError):
+        get_combustion_equation(CO2)
 
-    try:
-        expected = get_combustion_equation(LiH)
-    except:
-        raise KeyError("Molecule needs only carbon and hydrogen atoms")
+    with pytest.raises(KeyError):
+        get_combustion_equation(LiH)
 
-    try:
-        expected = get_combustion_equation(NO2)
-    except:
-        raise KeyError("Molecule needs only carbon and hydrogen atoms")
+    with pytest.raises(KeyError):
+        get_combustion_equation(NO2)
 
-    try:
-        expected = get_combustion_equation(1.0)
-    except:
-        raise TypeError("Molecule must be inserted as a string!")
+    with pytest.raises(TypeError):
+        get_combustion_equation(1.0)
+    
+    with pytest.raises(KeyError):
+        get_combustion_equation(CH45)
     
     expected = get_combustion_equation(CH4)
     actual = pd.DataFrame(({"CH4": [1], "O2": [2], "CO2": [1], "H2O": [2]}))
     assert actual == expected, "Balancing when hydrogen is not 2*C+2"
 
-    expected = get_combustion_equation(CH45)
-    actual = pd.DataFrame(({"CH4": [5], "O2": [10], "CO2": [5], "H2O": [10]}))
-    assert actual == expected, "Balancing with a multiplication factor"
 
 def test_is_valid():
 

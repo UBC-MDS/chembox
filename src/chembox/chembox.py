@@ -214,11 +214,15 @@ def get_combustion_equation(molecule: str):
     import pandas as pd
 
     if type(molecule) != str:
-        raise TypeError("Molecule must be inserted as a string!")   
-
+        raise TypeError("Molecule must be inserted as a string!")
+    
+    if "(" in molecule or ")" in molecule:
+        raise TypeError("Please enter the basic molecule (no brackets!)")
+    
+ 
     C5H12 = pd.DataFrame({"C": [1], "H": [4], "count": [5]})
     # mol_df = get_elements(molecule)
-    if not (set(C5H12.columns.tolist()) == set(["C", "H"]) or set(C5H12.columns.tolist()) == set(["C", "H", "count"])):
+    if not set(C5H12.columns.tolist()) == set(["C", "H"]):
         raise KeyError("The molecule needs to have on carbon and hydrogen atoms, please try again")
 
     if not is_valid(molecule):
@@ -229,18 +233,11 @@ def get_combustion_equation(molecule: str):
     num_H = C5H12.loc[0, "H"]
     num_O2 = (num_C * 2 + num_H/2) / 2
     num_mol = 1
-    count = 1
-    if "count" in C5H12.columns:
-        count = C5H12.loc[0, "count"]
 
     comb_eq = pd.DataFrame({molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
 
     # account for fractional oxygen
     if (num_O2 + num_C + num_H)%1 != 0:
         comb_eq = comb_eq.mul(2, axis=0)
-
-    # multiplication factor
-    if count > 1:
-        comb_eq = comb_eq.mul(count, axis=0)
 
     return comb_eq.astype(int)
