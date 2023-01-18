@@ -155,17 +155,17 @@ def is_valid(molecule: str) -> bool:
         elif len(elements[elements['Symbol']==elem]) == 1:
             info = elements[elements['Symbol']==elem]
             group = int(info['Group'])
-            period = int(info['Period'])
+            ox_state = (info['OxidationStates'])
 
-            if group > 3:
-                elem_val = group - 18
-            else:
-                elem_val = group
-            valance += elem_val * \
-                components[elem]
+            try:
+                elem_val = int(ox_state)
+            except ValueError:
+                raise ValueError('Oxidation state of '+ elem+ ' could be multiple. The formula could not be easily checked.')
+
+            valance += elem_val * components[elem]
         else:
             raise ValueError('An unknown element '+elem+' entered. Please check your input.')
-    # check if final valance is 0
+
     return valance == 0
 
 def get_molec_props(molecule: str):
