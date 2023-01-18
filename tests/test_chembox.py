@@ -1,6 +1,7 @@
-from chembox.chembox import *
 
 import pytest
+from chembox.chembox import *
+
 
 def test_is_valid():
 
