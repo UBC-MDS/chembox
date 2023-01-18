@@ -20,11 +20,11 @@ def test_is_valid():
     # Test for sodium hydroxide (a common base)
     assert is_valid('NaOH')
 
-    # Test for chloric acid (a common acid)
-    assert is_valid('HCl')
+    # Test for carbonic acid (a common acid)
+    assert is_valid('H2CO3')
 
     # Test for invalid chemical (too many chlorines)
-    assert not is_valid('HCl10')
+    assert not is_valid('H2(CO3)10')
 
      # Test for invalid chemical (too few sodiums)
     assert is_valid('NaCO3')
