@@ -1,8 +1,3 @@
-import os
-cur_dir = os.getcwd()
-SRC_CHEMBOX = cur_dir[
-    : cur_dir.index("chembox") + len("chembox")
-] + '/src/chembox/'
 
 def get_elements(molecule : str):
     """
@@ -58,7 +53,7 @@ def get_components(molecule):
     from collections import defaultdict
     import pandas as pd
     components = defaultdict(int)
-    elements = pd.read_csv(SRC_CHEMBOX+ 'data/elements.csv')
+    elements = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
     # find subcomponents
     while molecule.find(')') >= 0:
         end_brac = molecule.find(')')
@@ -122,8 +117,8 @@ def is_valid(molecule: str) -> bool:
     import pandas as pd
     from collections import defaultdict
     
-    conjugates = pd.read_csv(SRC_CHEMBOX+'data/conjugates.csv')
-    elements = pd.read_csv(SRC_CHEMBOX+'data/elements.csv')
+    conjugates = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/conjugates.csv')
+    elements = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
     components = defaultdict(int)
     for conj in conjugates['name']:
         # if there exists a conjugate abbreviation
