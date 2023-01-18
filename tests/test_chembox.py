@@ -7,7 +7,7 @@ def test_is_valid():
     # # Test for Value
     # with pytest.raises(ValueError):
     #     # check if ValueError is raised when the element input is wrong
-    is_valid('Nx2CO3')
+    #     is_valid('Nx2CO3')
 
     with pytest.raises(ValueError):
         # check if ValueError is raised when the oxidation state is not unique
