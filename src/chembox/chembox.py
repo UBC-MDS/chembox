@@ -45,15 +45,16 @@ def is_valid(molecule: str) -> bool:
     Examples
     --------
     >>> from chembox import is_valid
-    >>> is_valid('CH')
+    >>> is_valid('Na2SO4')
+    True
+    >>> is_valid('CaCO3')
+    True
+    >>> is_valid('NaCl2')
     False
-    >>> is_valid('CH4')
-    True
-    >>> is_valid('CH3COOH')
-    True
     """
     import pandas as pd
     
+
     return True
 
 def get_molec_props(molecule: str):
