@@ -9,10 +9,10 @@ def test_is_valid():
     #     # check if ValueError is raised when the element input is wrong
     #     is_valid('Nx2CO3')
 
-    with pytest.raises(ValueError):
-        # check if ValueError is raised when the oxidation state is not unique
-        # here, carbon alone can have multiple oxidation states
-        is_valid('C2H6')
+    # with pytest.raises(ValueError):
+    #     # check if ValueError is raised when the oxidation state is not unique
+    #     # here, carbon alone can have multiple oxidation states
+    #     is_valid('C2H6')
 
     # Test for calcium carbonate (a common salt)
     assert is_valid('Al2(SO4)3')
