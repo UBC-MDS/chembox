@@ -4,6 +4,8 @@
 
 `chembox` is a package for molecular information calculator based on empirical formulas of chemicals in raw text. It is designed to intelligently process text input containing the chemical formula and provide associated information on the inquired molecule. It is able to provide the molar mass, check a formula's validity, and provide a balanced combustion equation if the input is combustible. This tool can be utilized for various educational and research purposes for simple and fast information retrieval.
 
+We are using a dataset that contains established element data properties from [this site](https://github.com/Bluegrams/periodic-table-data/blob/master/Periodica.Data/Data/ElementData.csv).
+
 ## Installation
 
 `chembox` is developed and tested on Python 3.10. You can install it from PyPi via pip:
