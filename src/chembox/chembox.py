@@ -2,7 +2,7 @@ import os
 cur_dir = os.getcwd()
 SRC_CHEMBOX = cur_dir[
     : cur_dir.index("chembox") + len("chembox")
-] += '/src/chembox/'
+] + '/src/chembox/'
 
 def get_elements(molecule : str):
     """
