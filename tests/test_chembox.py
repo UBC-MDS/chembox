@@ -29,3 +29,12 @@ def test_is_valid():
 
      # Test for invalid chemical (too few sodiums)
     assert not is_valid('NaCO3')
+    
+def test_get_elements():
+    
+    # Test for one substance combination
+    assert get_elements('(C2H4)5')=={'H': 20, 'C': 10}, "Incorrect result for one substance combination"
+    # Test for two substance combination
+    assert get_elements('Al2(SO4)3')== {'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for two substance combination"
+    # Test for more than two substance combination
+    assert get_elements('Al2(SO4)3(C2H4)5') == {'H': 20, 'C': 10, 'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for more than two substance combination"
