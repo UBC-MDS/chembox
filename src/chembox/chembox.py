@@ -27,8 +27,7 @@ def get_elements(molecule : str):
     import numpy as np
     
     # Read fundamental elements
-    # don't forget to change path to /data/elements.csv
-    element = pd.read_csv('data/elements.csv')
+    element = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
     symbol = element['Symbol']
     symbol_len1 = element.loc[element['Symbol'].str.len() == 1, 'Symbol']
     symbol_len2 = element.loc[element['Symbol'].str.len() == 2, 'Symbol']
