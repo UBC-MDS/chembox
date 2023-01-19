@@ -16,18 +16,99 @@ def get_elements(molecule : str):
     Examples
     --------
     >>> from chembox import get_elements
-    >>> get_elements('5(C2H4)')
-    |    C    |    H    |    count    |
-    |    2    |    4    |      5      |
+    >>> get_elements('(C2H4)5')
+    {'H': 20, 'C': 10}
+    >>> get_elements('Al2(SO4)3')
+    {'O': 12, 'S': 3, 'Al': 2}
     """
 
     # get_elements function code here
-    # ...
     import pandas as pd
+    import numpy as np
     
+    # Read fundamental elements
+    # don't forget to change path to /data/elements.csv
+    element = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
+    symbol = element['Symbol']
+    symbol_len1 = element.loc[element['Symbol'].str.len() == 1, 'Symbol']
+    symbol_len2 = element.loc[element['Symbol'].str.len() == 2, 'Symbol']
     
+    #1 Check fundamental elements of length = 2
+    pos_2 = []
+    elm_2 = []
+    for elm in symbol_len2:
+        if molecule.find(elm) != -1:    
+            pos_2.append(molecule.find(elm))
+            elm_2.append(molecule[molecule.find(elm):molecule.find(elm)+2])
+               
+    #2 Check fundamental elements of length = 1
+    pos_1 = []
+    elm_1 = []
+    for elm in symbol_len1:
+        if molecule.find(elm) != -1:    
+            pos_1.append(molecule.find(elm))
+            elm_1.append(molecule[molecule.find(elm)])
     
-    return True
+    #3 Construct basic number of fundamental elements
+    #3.1 for fundamental elements of length = 1
+    no_1 = []
+    for pos in pos_1:
+        if molecule[pos+1].isdigit():
+            no_1.append(molecule[pos+1])
+        else:
+            no_1.append(1)      
+    #3.2 for fundamental elements of length = 2       
+    no_2 = []
+    for pos in pos_2:
+        no_2.append(molecule[pos+2])
+        
+    #4 Make intermediate dataframe result
+    imd = {'element': np.concatenate([elm_1,elm_2]),
+        'pos': np.concatenate([pos_1,pos_2]),
+        'no': np.concatenate([no_1,no_2]),
+        'parent': np.zeros(len(np.concatenate([elm_1,elm_2]))),
+        'parent_start': np.zeros(len(np.concatenate([elm_1,elm_2]))),
+        'parent_stop': np.zeros(len(np.concatenate([elm_1,elm_2]))),
+        'mult': np.zeros(len(np.concatenate([elm_1,elm_2]))),
+        'mult_no': np.zeros(len(np.concatenate([elm_1,elm_2])))}
+    imd_df = pd.DataFrame(imd)
+        
+    #4 Detect parenthesis
+    pos_parent_start = []
+    for idx, i in enumerate(molecule):
+        if i == "(":
+            pos_parent_start.append(idx)
+    pos_parent_stop = []
+    for idx, i in enumerate(molecule):
+        if i == ")":
+            pos_parent_stop.append(idx)
+            
+    #5 Adding parenthesis position to dataframe
+    for i in range(len(pos_parent_start)):
+        # print(pos_parent_start[i],pos_parent_stop[i])
+        
+        for j, pos in enumerate(imd['pos']):
+            # print(i,pos_parent_start[i],pos_parent_stop[i],j,pos)
+            
+            if pos>pos_parent_start[i] and pos<pos_parent_stop[i]:
+                imd_df.iloc[j,4] = pos_parent_start[i]
+                imd_df.iloc[j,5] = pos_parent_stop[i]
+                imd_df.iloc[j,3] = 1
+    
+    #6 Multiply with no. of substances
+    for i in range(imd_df.shape[0]):
+        # print(i,molecule[int(imd_df.iloc[i,5]+1)])
+        if imd_df.iloc[i,3]==1:
+            imd_df.iloc[i,6] = molecule[int(imd_df.iloc[i,5]+1)]
+            imd_df.iloc[i,7] = int(imd_df.iloc[i,6]) * int(imd_df.iloc[i,2])
+        else:
+            imd_df.iloc[i,7] = 1 * int(imd_df.iloc[i,2])
+            
+    #7 Final dictionary
+    imd_df['mult_no'] = imd_df['mult_no'].astype(int)
+    final_dict = {k:v for k,v in zip(imd_df['element'],imd_df['mult_no'])}
+    
+    return final_dict
 
 
 def get_components(molecule):
