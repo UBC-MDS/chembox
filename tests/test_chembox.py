@@ -1,5 +1,4 @@
 from chembox.chembox import *
-
 import pytest
 
 def test_is_valid():
@@ -28,3 +27,12 @@ def test_is_valid():
 
      # Test for invalid chemical (too few sodiums)
     assert not is_valid('NaCO3')
+    
+    
+    
+def test_get_elements():
+
+    assert get_elements('(C2H4)5')=={'H': 20, 'C': 10}, "Incorrectly!"
+        
+    
+    
