@@ -217,16 +217,12 @@ def get_combustion_equation(molecule: str):
         raise TypeError("Molecule must be inserted as a string!")
     
     if "(" in molecule or ")" in molecule:
-        raise TypeError("Please enter the basic molecule (no brackets!)")
+        raise KeyError("Please enter the basic molecule (no brackets!)")
     
- 
     C5H12 = pd.DataFrame({"C": [1], "H": [4], "count": [5]})
     # mol_df = get_elements(molecule)
     if not set(C5H12.columns.tolist()) == set(["C", "H"]):
         raise KeyError("The molecule needs to have on carbon and hydrogen atoms, please try again")
-
-    if not is_valid(molecule):
-        return "The molecule inserted is not valid, please try again"
 
     # get atom counts from string parser
     num_C = C5H12.loc[0, "C"]
