@@ -18,7 +18,7 @@ $ pip install chembox
 
 The package includes 4 functions for solving chemistry problems:
 
-- `get_elements`a parser that takes a chemical formula in string format and returns a pandas data frame that contains the elements and their respective count. 
+- `get_elements`a parser that takes a chemical formula in string format and returns a dictionary that contains the elements and their respective count. 
 
 - `is_valid`: a checker that returns a boolean indicating whether a given input is chemically reasonable.
 

@@ -1,7 +1,7 @@
 
 def get_elements(molecule : str):
     """
-    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
+    Convert a chemical molecule into its constituent elements with its respective counts as a dictionary.
     
     Parameters
     ----------
@@ -10,8 +10,8 @@ def get_elements(molecule : str):
     
     Returns
     -------
-    dataframe
-        The dataframe of each chemical elements with its molecular weight and count.
+    dictionary
+        The dictionary of each chemical elements with its molecular weight and count.
         
     Examples
     --------
