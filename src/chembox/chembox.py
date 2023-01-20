@@ -306,14 +306,14 @@ def get_combustion_equation(molecule: str):
     if "(" in molecule or ")" in molecule:
         raise KeyError("Please enter the basic molecule (no brackets!)")
     
-    C5H12 = pd.DataFrame({"C": [1], "H": [4], "count": [5]})
-    # mol_df = get_elements(molecule)
-    if not set(C5H12.columns.tolist()) == set(["C", "H"]):
-        raise KeyError("The molecule needs to have on carbon and hydrogen atoms, please try again")
+    mol_dict = get_components(molecule)
+    if not set(mol_dict.keys()) == set(["C", "H"]):
+        raise KeyError("The molecule needs to have only carbon and hydrogen atoms, please try again")
 
     # get atom counts from string parser
-    num_C = C5H12.loc[0, "C"]
-    num_H = C5H12.loc[0, "H"]
+    num_C = mol_dict["C"]
+    num_H = mol_dict["H"]
+    print(mol_dict)
     num_O2 = (num_C * 2 + num_H/2) / 2
     num_mol = 1
 
