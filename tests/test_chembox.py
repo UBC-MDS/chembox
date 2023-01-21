@@ -3,7 +3,6 @@ import os
 import pandas as pd
 from chembox.chembox import *
 
-
 def test_is_valid():
 
     # Test for Value
