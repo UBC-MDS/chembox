@@ -275,7 +275,7 @@ def get_molec_props(molecule: str):
     import pandas as pd
     import numpy as np
 
-    elements_df = pd.read_csv('data/elements.csv')
+    elements_df = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
 
     columns_to_rename = {
         'EnglishName': 'Name',
@@ -301,7 +301,7 @@ def get_molec_props(molecule: str):
     molec = get_elements(molecule)
 
     reduced_df = elements_df.loc[elements_df['Symbol'].isin(list(molec.keys()))]
-    reduced_df = reduced_df.rename(columns=columns_to_rename).reset_index().sort_values('Name')
+    reduced_df = reduced_df.rename(columns=columns_to_rename).sort_values('Name').reset_index()
 
     return reduced_df[columns_to_return]
 
