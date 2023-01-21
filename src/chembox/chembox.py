@@ -296,7 +296,14 @@ def get_molec_props(molecule: str):
         'Config', 
         'ShellConfig',
         'OxiStates'        
-    ] 
+    ]
+
+    molec = get_elements(molecule)
+
+    reduced_df = elements_df.loc[elements_df['Symbol'].isin(list(molec.keys()))]
+    reduced_df = reduced_df.rename(columns=columns_to_rename).reset_index().sort_values('Name')
+
+    return reduced_df[columns_to_return]
 
 def get_combustion_equation(molecule: str):
     """
