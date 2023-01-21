@@ -1,7 +1,7 @@
 
 def get_elements(molecule : str):
     """
-    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
+    Convert a chemical molecule into its constituent elements with its respective counts as a dictionary.
     
     Parameters
     ----------
@@ -10,8 +10,8 @@ def get_elements(molecule : str):
     
     Returns
     -------
-    dataframe
-        The dataframe of each chemical elements with its molecular weight and count.
+    dictionary
+        The dictionary of each chemical elements with its molecular weight and count.
         
     Examples
     --------
@@ -253,7 +253,7 @@ def is_valid(molecule: str) -> bool:
 
 def get_molec_props(molecule: str):
     """
-    Returns a dataframe with various properties of each element in the molecule
+    Returns a dataframe with various atomic properties of each element in the molecule
 
     Parameters
     ----------
@@ -262,20 +262,50 @@ def get_molec_props(molecule: str):
 
     Returns
     -------
-    property_df : dataframe
-        A dataframe containing the properties of the molecule.
+    reduced_df : dataframe
+        A pandas dataframe containing the properties of the molecule.
 
     Examples
     --------
-    >>> from chembox.chembox import get_molec_props
-    >>> get_molec_props('CH')
-    | Element | Atomic_Mass | Atomic_Radius | Density | Electron_Config |
-    |    C    |   12.011    |      170      | 2.2670  |   +4, +2, -4    |
-    |    H    |   1.0080    |      120      |8.988e-5 |      +1/-1      |
-
+    >>> from chembox import get_molec_props
+    >>> get_molec_props('CH4')
+    | Symbol |	 Name   | AtomicNumber | AtomicMass | Density(g/cm3) | AtomicRadius(pm) |    Config	   | ShellConfig | OxiStates |
+    |	C	 |  Carbon	|       6	   |   12.011	|     2.26700	 |       67.0	    | [He] 2s2 2p2 |    2,4,,,,, | -4,-3,-2,-1,0,1,2,3,4 |
+    |	H	 | Hydrogen	|       1	   |    1.008	|     0.00009	 |       53.0	    |      1s1	   |     1,,,,,, | 1 |
     """
+
     import pandas as pd
-    return True
+    import numpy as np
+
+    elements_df = pd.read_csv('https://raw.githubusercontent.com/UBC-MDS/chembox/main/src/chembox/data/elements.csv')
+
+    columns_to_rename = {
+        'EnglishName': 'Name',
+        'Density': 'Density(g/cm3)',
+        'AtomicRadius': 'AtomicRadius(pm)',
+        'Configuration': 'Config',
+        'ShellConfiguration': 'ShellConfig',
+        'OxidationStates': 'OxiStates'
+    }
+
+    columns_to_return = [
+        'Symbol',
+        'Name',
+        'AtomicNumber', 
+        'AtomicMass',
+        'Density(g/cm3)',
+        'AtomicRadius(pm)',
+        'Config', 
+        'ShellConfig',
+        'OxiStates'        
+    ]
+
+    molec = get_elements(molecule)
+
+    reduced_df = elements_df.loc[elements_df['Symbol'].isin(list(molec.keys()))]
+    reduced_df = reduced_df.rename(columns=columns_to_rename).sort_values('Name').reset_index()
+
+    return reduced_df[columns_to_return]
 
 def get_combustion_equation(molecule: str):
     """

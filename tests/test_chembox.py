@@ -1,5 +1,6 @@
 from chembox.chembox import *
 import pandas as pd
+import os
 import pytest
 
 def test_get_combustion_equation():
@@ -90,3 +91,14 @@ def test_get_elements():
     assert get_elements('Al2(SO4)3')== {'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for two substance combination"
     # Test for more than two substance combination
     assert get_elements('Al2(SO4)3(C2H4)5') == {'H': 20, 'C': 10, 'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for more than two substance combination"
+
+def test_get_molec_props():
+
+    # Ensures that the dataset is in the correct place
+    assert os.path.isfile('src/chembox/data/elements.csv') == True, 'The periodic table data set does not exist.'
+    # Ensures that the returned dataframe is the correct shape
+    assert get_molec_props('Al2(SO4)3(C2H4)5').shape == (5, 9), 'The get_molec_props function does not return the correct dataframe shape.'
+    # Ensures that columns are in the correct order
+    assert list(get_molec_props('Al2(SO4)3(C2H4)5')['Name']) == ['Aluminium', 'Carbon', 'Hydrogen', 'Oxygen', 'Sulfur'], 'The columns in the get_molec_props function are not in alphabetical order.'
+    # Ensures that the function outputs the correct data frame
+    assert get_molec_props('Al2(SO4)3(C2H4)5').equals(pd.read_csv("tests/get_molec_props_toy_df.csv", index_col=0))

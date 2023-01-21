@@ -18,13 +18,17 @@ $ pip install chembox
 
 The package includes 4 functions for solving chemistry problems:
 
-- `get_elements`a parser that takes a chemical formula in string format and returns a pandas data frame that contains the elements and their respective count. 
+- `get_elements`a parser that takes a chemical formula in string format and returns a dictionary that contains the elements and their respective count. 
 
 - `is_valid`: a checker that returns a boolean indicating whether a given input is chemically reasonable.
 
 - `get_molec_props`: a method that takes a chemical formula in string format and returns a dataframe with various useful properties of each element in the formula.
 
 - `get_combustion_equation`: a method that takes a text chemical formula that only contains carbon (`C`) and hydrogen (`H`) and outputs a balanced equation resulting from combustion.
+
+## Dataset
+
+In order to be able to perform some of the functions above, a dataset will need to be used that contains various atomic properties of the elements in the periodic table. The data can be found in the Chembox repo [here](https://github.com/UBC-MDS/chembox/tree/main/src/chembox/data) which was sourced from [here](https://github.com/Bluegrams/periodic-table-data/tree/master/Periodica.Data/Data). Please note that we do not take credit for the dataset, it is merely for use with our functions.
 
 ## Fitting into the Python ecosystem
 
