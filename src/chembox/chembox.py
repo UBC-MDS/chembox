@@ -15,18 +15,11 @@ def get_elements(molecule : str):
         
     Examples
     --------
-<<<<<<< HEAD
-    >>> from chembox.chembox import get_elements
-    >>> get_elements('5(C2H4)')
-    |    C    |    H    |    count    |
-    |    2    |    4    |      5      |
-=======
     >>> from chembox import get_elements
     >>> get_elements('(C2H4)5')
     {'H': 20, 'C': 10}
     >>> get_elements('Al2(SO4)3')
     {'O': 12, 'S': 3, 'Al': 2}
->>>>>>> a84698052e64f01249ae2a412701e0c0e64d994d
     """
 
     # get_elements function code here
@@ -343,7 +336,8 @@ def get_combustion_equation(molecule: str):
     if "(" in molecule or ")" in molecule:
         raise KeyError("Please enter the basic molecule (no brackets!)")
     
-    mol_dict = get_components(molecule)
+    mol_dict = get_components(molecule)  # get the components and counts of the molecule
+
     if not set(mol_dict.keys()) == set(["C", "H"]):
         raise KeyError("The molecule needs to have only carbon and hydrogen atoms, please try again")
 
