@@ -271,9 +271,32 @@ def get_molec_props(molecule: str):
     |	C	 |  Carbon	|       6	   |   12.011	|     2.26700	 |       67.0	    | [He] 2s2 2p2 |    2,4,,,,, | -4,-3,-2,-1,0,1,2,3,4 |
     |	H	 | Hydrogen	|       1	   |    1.008	|     0.00009	 |       53.0	    |      1s1	   |     1,,,,,, | 1 |
     """
-    
+
     import pandas as pd
-    return True
+    import numpy as np
+
+    elements_df = pd.read_csv('data/elements.csv')
+
+    columns_to_rename = {
+        'EnglishName': 'Name',
+        'Density': 'Density(g/cm3)',
+        'AtomicRadius': 'AtomicRadius(pm)',
+        'Configuration': 'Config',
+        'ShellConfiguration': 'ShellConfig',
+        'OxidationStates': 'OxiStates'
+    }
+
+    columns_to_return = [
+        'Symbol',
+        'Name',
+        'AtomicNumber', 
+        'AtomicMass',
+        'Density(g/cm3)',
+        'AtomicRadius(pm)',
+        'Config', 
+        'ShellConfig',
+        'OxiStates'        
+    ] 
 
 def get_combustion_equation(molecule: str):
     """
