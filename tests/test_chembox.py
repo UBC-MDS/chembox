@@ -3,7 +3,6 @@ import os
 import pandas as pd
 from chembox.chembox import *
 
-
 def test_is_valid():
 
     # Test for Value
@@ -39,11 +38,15 @@ def test_get_elements():
     assert get_elements('Al2(SO4)3')== {'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for two substance combination"
     # Test for more than two substance combination
     assert get_elements('Al2(SO4)3(C2H4)5') == {'H': 20, 'C': 10, 'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for more than two substance combination"
+    # Test for 2-digit substance
+    assert get_elements('C5H12') == {'H': 12, 'C': 5}, "Incorrect result for 2-digit substance"
+    # Test for multiple 2-digit substance
+    assert get_elements('(C12H24)2') == {'H': 48, 'C': 24}, "Incorrect result for multiple 2-digit substance"
 
 def test_get_molec_props():
 
     # Ensures that the dataset is in the correct place
-    assert os.path.isfile('src/chembox/data/elements.csv') == True, 'The periodic table data set does not exist.'
+    assert os.path.isfile('data/elements.csv') == True, 'The periodic table data set does not exist.'
     # Ensures that the returned dataframe is the correct shape
     assert get_molec_props('Al2(SO4)3(C2H4)5').shape == (5, 9), 'The get_molec_props function does not return the correct dataframe shape.'
     # Ensures that columns are in the correct order
