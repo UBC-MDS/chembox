@@ -26,6 +26,10 @@ The package includes 4 functions for solving chemistry problems:
 
 - `get_combustion_equation`: a method that takes a text chemical formula that only contains carbon (`C`) and hydrogen (`H`) and outputs a balanced equation resulting from combustion.
 
+## Dataset
+
+In order to be able to perform some of the functions above, a dataset will need to be used that contains various atomic properties of the elements in the periodic table. The data can be found in the Chembox repo [here](https://github.com/UBC-MDS/chembox/tree/main/src/chembox/data) which was sourced from [here](https://github.com/Bluegrams/periodic-table-data/tree/master/Periodica.Data/Data). Please note that we do not take credit for the dataset, it is merely for use with our functions.
+
 ## Fitting into the Python ecosystem
 
 A similar package [chemsolve](https://github.com/amogh7joshi/chemsolve) is available online that employs a similar string-parsing design and molar mass calculation.
