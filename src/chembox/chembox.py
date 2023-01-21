@@ -52,26 +52,32 @@ def get_elements(molecule : str):
     #4.1 for fundamental elements of length = 1
     no_1 = []
     for pos in pos_1:
-        if molecule[pos+1].isdigit():
-            num=0
-            for m in range(len(molecule)-pos):
-                if molecule[pos+1:pos+1+m].isdigit():
-                    num=num+1
-            no_1.append(molecule[pos+1:pos+1+num])
-        else:
+        if pos == len(molecule)-1:
             no_1.append(1) 
-            
+        else:
+            if molecule[pos+1].isdigit():
+                num=0
+                for m in range(len(molecule)-pos):
+                    if molecule[pos+1:pos+1+m].isdigit():
+                        num=num+1
+                no_1.append(molecule[pos+1:pos+1+num])
+            else:
+                no_1.append(1) 
+    
     #4.2 for fundamental elements of length = 2       
     no_2 = []
     for pos in pos_2:
-        if molecule[pos+2].isdigit():
-            num=0
-            for m in range(len(molecule)-pos):
-                if molecule[pos+2:pos+2+m].isdigit():
-                    num=num+1
-            no_1.append(molecule[pos+2:pos+2+num])
+        if pos == len(molecule)-2:
+            no_2.append(1) 
         else:
-            no_1.append(1)     
+            if molecule[pos+2].isdigit():
+                num=0
+                for m in range(len(molecule)-pos):
+                    if molecule[pos+2:pos+2+m].isdigit():
+                        num=num+1
+                no_2.append(molecule[pos+2:pos+2+num])
+            else:
+                no_2.append(1)        
         
     #5 Make intermediate dataframe result
     imd = {'element': np.concatenate([elm_1,elm_2]),
@@ -336,7 +342,7 @@ def get_combustion_equation(molecule: str):
     if "(" in molecule or ")" in molecule:
         raise KeyError("Please enter the basic molecule (no brackets!)")
     
-    mol_dict = get_components(molecule)  # get the components and counts of the molecule
+    mol_dict = get_elements(molecule)  # get the components and counts of the molecule
 
     if not set(mol_dict.keys()) == set(["C", "H"]):
         raise KeyError("The molecule needs to have only carbon and hydrogen atoms, please try again")
