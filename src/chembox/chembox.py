@@ -27,7 +27,7 @@ def get_elements(molecule : str):
     import numpy as np
     
     #1 Read fundamental elements
-    element = pd.read_csv('src/chembox/data/elements.csv')
+    element = pd.read_csv('data/elements.csv')
     symbol = element['Symbol']
     symbol_len1 = element.loc[element['Symbol'].str.len() == 1, 'Symbol']
     symbol_len2 = element.loc[element['Symbol'].str.len() == 2, 'Symbol']
@@ -140,7 +140,7 @@ def get_components(molecule):
     from collections import defaultdict
     import pandas as pd
     components = defaultdict(int)
-    elements = pd.read_csv('src/chembox/data/elements.csv')
+    elements = pd.read_csv('data/elements.csv')
     # find subcomponents
     while molecule.find(')') >= 0:
         end_brac = molecule.find(')')
@@ -204,8 +204,8 @@ def is_valid(molecule: str) -> bool:
     import pandas as pd
     from collections import defaultdict
     
-    conjugates = pd.read_csv('src/chembox/data/conjugates.csv')
-    elements = pd.read_csv('src/chembox/data/elements.csv')
+    conjugates = pd.read_csv('data/conjugates.csv')
+    elements = pd.read_csv('data/elements.csv')
     components = defaultdict(int)
     for conj in conjugates['name']:
         # if there exists a conjugate abbreviation
@@ -281,7 +281,7 @@ def get_molec_props(molecule: str):
     import pandas as pd
     import numpy as np
 
-    elements_df = pd.read_csv('src/chembox/data/elements.csv')
+    elements_df = pd.read_csv('data/elements.csv')
 
     columns_to_rename = {
         'EnglishName': 'Name',

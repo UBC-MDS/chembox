@@ -46,7 +46,7 @@ def test_get_elements():
 def test_get_molec_props():
 
     # Ensures that the dataset is in the correct place
-    assert os.path.isfile('src/chembox/data/elements.csv') == True, 'The periodic table data set does not exist.'
+    assert os.path.isfile('data/elements.csv') == True, 'The periodic table data set does not exist.'
     # Ensures that the returned dataframe is the correct shape
     assert get_molec_props('Al2(SO4)3(C2H4)5').shape == (5, 9), 'The get_molec_props function does not return the correct dataframe shape.'
     # Ensures that columns are in the correct order
