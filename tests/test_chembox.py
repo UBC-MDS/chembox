@@ -1,7 +1,59 @@
-import pytest
-import os
-import pandas as pd
 from chembox.chembox import *
+import pandas as pd
+import os
+import pytest
+
+def test_get_combustion_equation():
+    """ Test function for unit tests of the `get_combustion_equation`
+
+    Raises:
+        KeyError: Check if a molecule has only C and H atoms
+        KeyError: Check if a molecule has only C and H atoms
+        KeyError: Check if a molecule has only C and H atoms
+        TypeError: Check if a molecule has string type
+    """
+    C5H12 = "C5H12"
+    C6H14 = "C6H14"
+    CO2 = "CO2"
+    LiH = "LiH"
+    NO2 = "NO2"
+    CH4 = "CH4"
+    CH45 = "(CH4)5"
+    
+    # test no half factor, regular CH molecule
+    expected = get_combustion_equation(C5H12)
+    actual = pd.DataFrame(({"C5H12": [1], "O2": [8], "CO2": [5], "H2O": [6]}))
+    assert actual.equals(expected), "Balancing carbon or hydrogen incorrectly"
+
+    # test multiplication factor
+    expected = get_combustion_equation(C6H14)
+    actual = pd.DataFrame(({"C6H14": [2], "O2": [19], "CO2": [12], "H2O": [14]}))
+    assert actual.equals(expected), "Balancing fractional oxygen incorrectly!"
+
+    # test a different regular, not just 2*C + 2
+    expected = get_combustion_equation(CH4)
+    actual = pd.DataFrame(({"CH4": [1], "O2": [2], "CO2": [1], "H2O": [2]}))
+    assert actual.equals(expected), "Balancing when hydrogen is not 2*C+2"
+
+    # test only C is in the molecule
+    with pytest.raises(KeyError):
+        get_combustion_equation(CO2)
+
+    # test only H is in the molecule
+    with pytest.raises(KeyError):
+        get_combustion_equation(LiH)
+
+    # test neither C or H is in the molecule
+    with pytest.raises(KeyError):
+        get_combustion_equation(NO2)
+
+    # test inputting not a string
+    with pytest.raises(TypeError):
+        get_combustion_equation(1.0)
+    
+    # test input with brackets
+    with pytest.raises(KeyError):
+        get_combustion_equation(CH45)
 
 def test_is_valid():
 

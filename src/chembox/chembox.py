@@ -193,12 +193,8 @@ def is_valid(molecule: str) -> bool:
 
     Examples
     --------
-    >>> from chembox import is_valid
-    >>> is_valid('Na2SO4')
-    True
-    >>> is_valid('CaCO3')
-    True
-    >>> is_valid('NaCl2')
+    >>> from chembox.chembox import is_valid
+    >>> is_valid('CH')
     False
     """
     import pandas as pd
@@ -327,10 +323,35 @@ def get_combustion_equation(molecule: str):
 
     Examples
     --------
-    >>> from chembox import get_combustion_equation
+    >>> from chembox.chembox import get_combustion_equation
     >>> get_combustion_equation('C5H12')
     | C5H12 | O2 | CO2 | H2O |
     |   1   |  8 |  5  |  6  | 
     """
     import pandas as pd
-    return True
+
+    if type(molecule) != str:
+        raise TypeError("Molecule must be inserted as a string!")
+    
+    if "(" in molecule or ")" in molecule:
+        raise KeyError("Please enter the basic molecule (no brackets!)")
+    
+    mol_dict = get_components(molecule)  # get the components and counts of the molecule
+
+    if not set(mol_dict.keys()) == set(["C", "H"]):
+        raise KeyError("The molecule needs to have only carbon and hydrogen atoms, please try again")
+
+    # get atom counts from string parser
+    num_C = mol_dict["C"]
+    num_H = mol_dict["H"]
+    print(mol_dict)
+    num_O2 = (num_C * 2 + num_H/2) / 2
+    num_mol = 1
+
+    comb_eq = pd.DataFrame({molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
+
+    # account for fractional oxygen
+    if (num_O2 + num_C + num_H)%1 != 0:
+        comb_eq = comb_eq.mul(2, axis=0)
+
+    return comb_eq.astype(int)
