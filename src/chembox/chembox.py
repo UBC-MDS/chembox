@@ -39,39 +39,50 @@ def get_elements(molecule : str):
         if molecule.find(elm) != -1:    
             pos_2.append(molecule.find(elm))
             elm_2.append(molecule[molecule.find(elm):molecule.find(elm)+2])
+    
+    #2.1 Replace length-2 elements with -
+    temp_molecule = molecule
+    for i in range(len(elm_2)):
+        temp_molecule = temp_molecule.replace(elm_2[i], "--")
                
     #3 Check fundamental elements of length = 1
     pos_1 = []
     elm_1 = []
     for elm in symbol_len1:
-        if molecule.find(elm) != -1:    
-            pos_1.append(molecule.find(elm))
-            elm_1.append(molecule[molecule.find(elm)])
+        if temp_molecule.find(elm) != -1:    
+            pos_1.append(temp_molecule.find(elm))
+            elm_1.append(temp_molecule[temp_molecule.find(elm)])
     
     #4 Construct basic number of fundamental elements
     #4.1 for fundamental elements of length = 1
     no_1 = []
     for pos in pos_1:
-        if molecule[pos+1].isdigit():
-            num=0
-            for m in range(len(molecule)-pos):
-                if molecule[pos+1:pos+1+m].isdigit():
-                    num=num+1
-            no_1.append(molecule[pos+1:pos+1+num])
-        else:
+        if pos == len(molecule)-1:
             no_1.append(1) 
-            
+        else:
+            if molecule[pos+1].isdigit():
+                num=0
+                for m in range(len(molecule)-pos):
+                    if molecule[pos+1:pos+1+m].isdigit():
+                        num=num+1
+                no_1.append(molecule[pos+1:pos+1+num])
+            else:
+                no_1.append(1) 
+    
     #4.2 for fundamental elements of length = 2       
     no_2 = []
     for pos in pos_2:
-        if molecule[pos+2].isdigit():
-            num=0
-            for m in range(len(molecule)-pos):
-                if molecule[pos+2:pos+2+m].isdigit():
-                    num=num+1
-            no_1.append(molecule[pos+2:pos+2+num])
+        if pos == len(molecule)-2:
+            no_2.append(1) 
         else:
-            no_1.append(1)     
+            if molecule[pos+2].isdigit():
+                num=0
+                for m in range(len(molecule)-pos):
+                    if molecule[pos+2:pos+2+m].isdigit():
+                        num=num+1
+                no_2.append(molecule[pos+2:pos+2+num])
+            else:
+                no_2.append(1)        
         
     #5 Make intermediate dataframe result
     imd = {'element': np.concatenate([elm_1,elm_2]),
@@ -115,67 +126,6 @@ def get_elements(molecule : str):
     final_dict = {k:v for k,v in zip(imd_df['element'],imd_df['mult_no'])}
     
     return final_dict
-
-
-def get_components(molecule):
-    """
-    Convert a chemical molecule into its constituent elements with its respective counts as a dataframe.
-    
-    Parameters
-    ----------
-    molecule : str
-        Chemical molecule.
-    
-    Returns
-    -------
-    defaultdict
-        A dictionary that contains the elements as keys and values as counts
-        
-    Examples
-    --------
-    >>> from chembox import get_components
-    >>> get_components('Na2SO4')
-    defaultdict(int, {'Na': 2, 'S': 1, 'O': 4})
-    """
-    from collections import defaultdict
-    import pandas as pd
-    components = defaultdict(int)
-    elements = pd.read_csv('data/elements.csv')
-    # find subcomponents
-    while molecule.find(')') >= 0:
-        end_brac = molecule.find(')')
-        start_brac = end_brac - 1
-        while molecule[start_brac] != '(':
-            start_brac -= 1
-        subcomponent = get_components(molecule[start_brac + 1:end_brac])
-        ind_start = end_brac + 1 
-        ind_end = ind_start + 1
-        while ind_end < len(molecule) and molecule[ind_end].isnumeric():
-            ind_end += 1
-
-        # Get the subscript number
-        num = molecule[ind_start: ind_end]
-        # Update the count of the molecules
-        for comp in subcomponent:
-            subcomponent[comp] = subcomponent[comp] * int(num)
-        # Remove the original string containing ()
-        molecule = molecule.replace(molecule[start_brac:end_brac+1]+num, '')
-        for comp in subcomponent:
-            components[comp] += subcomponent[comp]
-
-    # if there are no more brackets
-    import re
-    # split by capital letters
-    elem_set = re.findall('[A-Z][^A-Z]*', molecule)
-    for elem in elem_set:
-        if re.search(r"\d", elem):
-            components[elem[:re.search(r"\d", elem).start()]] += \
-                int(elem[re.search(r"\d", elem).start():])
-        else:
-            components[elem] += 1
-    
-    return components
-
 
 def is_valid(molecule: str) -> bool: 
     """
@@ -225,7 +175,7 @@ def is_valid(molecule: str) -> bool:
                 molecule = molecule.replace('()'+num, '')
     # find if there exist brackets
 
-    other_elem = get_components(molecule)
+    other_elem = get_elements(molecule)
     for elem in other_elem:
         components[elem] += other_elem[elem]
 
@@ -336,7 +286,7 @@ def get_combustion_equation(molecule: str):
     if "(" in molecule or ")" in molecule:
         raise KeyError("Please enter the basic molecule (no brackets!)")
     
-    mol_dict = get_components(molecule)  # get the components and counts of the molecule
+    mol_dict = get_elements(molecule)  # get the components and counts of the molecule
 
     if not set(mol_dict.keys()) == set(["C", "H"]):
         raise KeyError("The molecule needs to have only carbon and hydrogen atoms, please try again")

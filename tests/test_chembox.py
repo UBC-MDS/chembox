@@ -85,15 +85,25 @@ def test_is_valid():
 def test_get_elements():
     
     # Test for one substance combination
-    assert get_elements('(C2H4)5')=={'H': 20, 'C': 10}, "Incorrect result for one substance combination"
+    assert get_elements('(C2H4)5') == {'H': 20, 'C': 10}, "Incorrect result for one substance combination"
     # Test for two substance combination
-    assert get_elements('Al2(SO4)3')== {'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for two substance combination"
+    assert get_elements('Al2(SO4)3') == {'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for two substance combination"
     # Test for more than two substance combination
     assert get_elements('Al2(SO4)3(C2H4)5') == {'H': 20, 'C': 10, 'O': 12, 'S': 3, 'Al': 2}, "Incorrect result for more than two substance combination"
     # Test for 2-digit substance
     assert get_elements('C5H12') == {'H': 12, 'C': 5}, "Incorrect result for 2-digit substance"
     # Test for multiple 2-digit substance
     assert get_elements('(C12H24)2') == {'H': 48, 'C': 24}, "Incorrect result for multiple 2-digit substance"
+    # Test for multiple of single substances - case1
+    assert get_elements('LiH') == {'H': 1, 'Li': 1}, "Incorrect result for multiple of single substances"
+    # Test for multiple of single substances - case2
+    assert get_elements('HLi') == {'H': 1, 'Li': 1}, "Incorrect result for multiple of single substances"
+    # Test for multiple of single substances - case3
+    assert get_elements('LiH2') == {'H': 2, 'Li': 1}, "Incorrect result for multiple of single substances"
+    # Test for multiple of single substances - case4
+    assert get_elements('Li2H8') == {'H': 8, 'Li': 2}, "Incorrect result for multiple of single substances"
+    # Test for duplicated elements
+    assert get_elements('NaOH') == {'H': 1, 'O': 1, 'Na': 1}, "Incorrect result for duplicated elements"
 
 def test_get_molec_props():
 
