@@ -1,6 +1,13 @@
 name: ci-cd
 
-on: [push, pull_request]
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  
+  # Allows you to run job from Actions tab whenever
+  workflow_dispatch:
 
 jobs:
   ci:
@@ -12,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
+          python-version: "3.9"
 
       - name: Check-out repository
         uses: actions/checkout@v2
@@ -49,7 +56,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
+          python-version: "3.9"
 
       - name: Check-out repository
         uses: actions/checkout@v2
