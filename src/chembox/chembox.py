@@ -299,9 +299,14 @@ def get_combustion_equation(molecule: str):
     num_mol = 1
 
     comb_eq = pd.DataFrame({molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
-
+    i = 0
     # account for fractional oxygen
-    if (num_O2 + num_C + num_H)%1 != 0:
+    while (num_O2 + num_C + num_H)%1 != 0:
+        if i == 10:
+            break
         comb_eq = comb_eq.mul(2, axis=0)
+        num_C = comb_eq["CO2"]
+        num_H = comb_eq["H2O"]
+        num_O2 = (2 * num_C + num_H)/2
 
     return comb_eq.astype(int)
