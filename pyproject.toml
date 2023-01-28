@@ -2,7 +2,7 @@
 name = "chembox"
 version = "0.0.7"
 description = "A package to analyze chemical formulas"
-authors = ["Wilfred Hass"]
+authors = ["Wilfred Hass", "Luke Yang", "Vikram Grewal", "Nate Suraporn"]
 license = "MIT"
 readme = "README.md"
 
