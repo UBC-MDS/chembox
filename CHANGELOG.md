@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.6 (2023-01-28)
+
+
 ## v0.0.5 (2023-01-28)
 ### Fix
 * Fixed dataframe access throwing error ([`064b2eb`](https://github.com/UBC-MDS/chembox/commit/064b2eb4c86ec04832987bae7ffe0a8b7ae9c740))
