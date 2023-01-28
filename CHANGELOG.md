@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2023-01-28)
+### Feature
+* Add new badges and author names ([`f9a02cb`](https://github.com/UBC-MDS/chembox/commit/f9a02cb061d9d23971b8871ad36178c49cbc5241))
+
 ## v0.2.0 (2023-01-28)
 ### Feature
 * Add ci-cd badge ([`909de40`](https://github.com/UBC-MDS/chembox/commit/909de40d9532232b89c7fde2b4c52d2e7b522e70))
