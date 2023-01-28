@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.0 (2023-01-28)
+### Feature
+* Try bumping the features ([`8f49b22`](https://github.com/UBC-MDS/chembox/commit/8f49b22da938c90fe4fbae6e537151f5060c81fb))
+
 ## v0.0.7 (2023-01-28)
 
 
