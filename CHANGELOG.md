@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-01-28)
+### Feature
+* Add ci-cd badge ([`909de40`](https://github.com/UBC-MDS/chembox/commit/909de40d9532232b89c7fde2b4c52d2e7b522e70))
+
 ## v0.1.0 (2023-01-28)
 ### Feature
 * Try bumping the features ([`8f49b22`](https://github.com/UBC-MDS/chembox/commit/8f49b22da938c90fe4fbae6e537151f5060c81fb))
