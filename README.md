@@ -1,5 +1,6 @@
 # chembox
 
+![example workflow](https://github.com/UBC-MDS/chembox/actions/workflows/ci-cd.yml/badge.svg)
 ## Introduction
 
 `chembox` is a package for molecular information calculator based on empirical formulas of chemicals in raw text. It is designed to intelligently process text input containing the chemical formula and provide associated information on the inquired molecule. It is able to provide the molar mass, check a formula's validity, and provide a balanced combustion equation if the input is combustible. This tool can be utilized for various educational and research purposes for simple and fast information retrieval.
