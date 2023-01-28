@@ -299,6 +299,7 @@ def get_combustion_equation(molecule: str):
     num_mol = 1
 
     comb_eq = pd.DataFrame({molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
+    print(num_O2, num_C, num_H)
     i = 0
     # account for fractional oxygen
     while (num_O2 + num_C + num_H)%1 != 0: # should never be greater than 4 iterations
@@ -306,8 +307,9 @@ def get_combustion_equation(molecule: str):
             print("Check output to see if there is still a fraction!")
             break  
         comb_eq = comb_eq.mul(2, axis=0)
-        num_C = comb_eq["CO2"]
-        num_H = comb_eq["H2O"]
+        num_C = comb_eq.loc[0, "CO2"]
+        num_H = comb_eq.loc[0, "H2O"]
         num_O2 = (2 * num_C + num_H)/2
+        print(num_O2, num_C, num_H)
 
     return comb_eq.astype(int)
