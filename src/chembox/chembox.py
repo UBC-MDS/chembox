@@ -6,7 +6,7 @@ def get_elements(molecule: str):
     Parameters
     ----------
     molecule : str
-        Chemical molecule.
+        Chemical molecule. 
 
     Returns
     -------
