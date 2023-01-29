@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.1 (2023-01-29)
+### Fix
+* Update usage ([`098f7b4`](https://github.com/UBC-MDS/chembox/commit/098f7b4f7594e58553b56e6b7285882d89f38e99))
+* Add doc badge ([`d717384`](https://github.com/UBC-MDS/chembox/commit/d717384eed047e1d59ee96062fbe30064367985a))
+
 ## v0.3.0 (2023-01-28)
 ### Feature
 * Add new badges and author names ([`f9a02cb`](https://github.com/UBC-MDS/chembox/commit/f9a02cb061d9d23971b8871ad36178c49cbc5241))

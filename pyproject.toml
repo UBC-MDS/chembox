@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chembox"
-version = "0.3.0"
+version = "0.3.1"
 description = "A package to analyze chemical formulas"
 authors = ["Wilfred Hass", "Luke Yang", "Vikram Grewal", "Nate Suraporn"]
 license = "MIT"
