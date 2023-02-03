@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.3 (2023-02-03)
+
+
 ## v0.3.2 (2023-01-29)
 ### Fix
 * Add example usage link ([`b388b09`](https://github.com/UBC-MDS/chembox/commit/b388b09ac823dc5f557a46c38ab7dccb7f587c7a))
