@@ -320,5 +320,5 @@ def get_combustion_equation(molecule: str):
         num_C = comb_eq.loc[0, "CO2"]
         num_H = comb_eq.loc[0, "H2O"]
         num_O2 = (2 * num_C + num_H)/2
-
+        
     return comb_eq.astype(int)
