@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.0 (2023-02-03)
+### Feature
+* Major version bump ([`e183ba7`](https://github.com/UBC-MDS/chembox/commit/e183ba729a0ac49a582b644509e5a177864933cc))
+
+### Breaking
+* major version bump ([`e183ba7`](https://github.com/UBC-MDS/chembox/commit/e183ba729a0ac49a582b644509e5a177864933cc))
+
 ## v0.3.3 (2023-02-03)
 
 
