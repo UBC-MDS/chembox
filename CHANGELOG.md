@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2023-02-06)
+### Feature
+* Working data folder ([`110728c`](https://github.com/UBC-MDS/chembox/commit/110728c5069273c76001347f1e7281d99d264851))
+
+### Fix
+* Add s to element ([`b4d4d29`](https://github.com/UBC-MDS/chembox/commit/b4d4d29d0ba4695159e341e87d29976fe9d33d46))
+* Name changed ([`6e0d8df`](https://github.com/UBC-MDS/chembox/commit/6e0d8dfda34be208d7f609af8069c9f55c20d858))
+
 ## v1.0.1 (2023-02-06)
 
 
