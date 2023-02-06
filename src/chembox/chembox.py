@@ -1,3 +1,5 @@
+import os
+DATA_FOLDER = os.path.dirname(__file__)
 
 def get_elements(molecule: str):
     """
@@ -27,7 +29,8 @@ def get_elements(molecule: str):
     import numpy as np
 
     # 1 Read fundamental elements
-    element = pd.read_csv('data/elements.csv')
+    
+    element = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
     symbol = element['Symbol']
     symbol_len1 = element.loc[element['Symbol'].str.len() == 1, 'Symbol']
     symbol_len2 = element.loc[element['Symbol'].str.len() == 2, 'Symbol']
@@ -151,8 +154,8 @@ def is_valid(molecule: str) -> bool:
     import pandas as pd
     from collections import defaultdict
 
-    conjugates = pd.read_csv('data/conjugates.csv')
-    elements = pd.read_csv('data/elements.csv')
+    conjugates = pd.read_csv(os.path.join(DATA_FOLDER,'data/conjugates.csv'))
+    elements = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
     components = defaultdict(int)
     for conj in conjugates['name']:
         # if there exists a conjugate abbreviation
@@ -231,7 +234,7 @@ def get_molec_props(molecule: str):
     import pandas as pd
     import numpy as np
 
-    elements_df = pd.read_csv('data/elements.csv')
+    element = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
 
     columns_to_rename = {
         'EnglishName': 'Name',
@@ -303,13 +306,13 @@ def get_combustion_equation(molecule: str):
     # get atom counts from string parser
     num_C = mol_dict["C"]
     num_H = mol_dict["H"]
-    print(mol_dict)
+    
     num_O2 = (num_C * 2 + num_H/2) / 2
     num_mol = 1
 
     comb_eq = pd.DataFrame(
         {molecule: [num_mol], "O2": [num_O2], "CO2": [num_C], "H2O": [num_H/2]})
-    print(num_O2, num_C, num_H)
+
     i = 0
     # account for fractional oxygen
     while (num_O2 + num_C + num_H) % 1 != 0:  # should never be greater than 4 iterations
@@ -320,6 +323,5 @@ def get_combustion_equation(molecule: str):
         num_C = comb_eq.loc[0, "CO2"]
         num_H = comb_eq.loc[0, "H2O"]
         num_O2 = (2 * num_C + num_H)/2
-        print(num_O2, num_C, num_H)
-
+        
     return comb_eq.astype(int)
