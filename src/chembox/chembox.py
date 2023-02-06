@@ -234,7 +234,7 @@ def get_molec_props(molecule: str):
     import pandas as pd
     import numpy as np
 
-    element = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
+    element_df = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
 
     columns_to_rename = {
         'EnglishName': 'Name',
