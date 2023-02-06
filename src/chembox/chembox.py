@@ -1,3 +1,5 @@
+import os
+DATA_FOLDER = os.path.dirname(__file__)
 
 def get_elements(molecule: str):
     """
@@ -27,7 +29,8 @@ def get_elements(molecule: str):
     import numpy as np
 
     # 1 Read fundamental elements
-    element = pd.read_csv('data/elements.csv')
+    
+    element = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
     symbol = element['Symbol']
     symbol_len1 = element.loc[element['Symbol'].str.len() == 1, 'Symbol']
     symbol_len2 = element.loc[element['Symbol'].str.len() == 2, 'Symbol']
@@ -151,8 +154,8 @@ def is_valid(molecule: str) -> bool:
     import pandas as pd
     from collections import defaultdict
 
-    conjugates = pd.read_csv('data/conjugates.csv')
-    elements = pd.read_csv('data/elements.csv')
+    conjugates = pd.read_csv(os.path.join(DATA_FOLDER,'data/conjugates.csv'))
+    elements = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
     components = defaultdict(int)
     for conj in conjugates['name']:
         # if there exists a conjugate abbreviation
@@ -231,7 +234,7 @@ def get_molec_props(molecule: str):
     import pandas as pd
     import numpy as np
 
-    elements_df = pd.read_csv('data/elements.csv')
+    element = pd.read_csv(os.path.join(DATA_FOLDER,'data/elements.csv'))
 
     columns_to_rename = {
         'EnglishName': 'Name',
